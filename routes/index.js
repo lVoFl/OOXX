@@ -81,7 +81,11 @@ router.get('/game/pass', (req, res) => {
       if (error) {
         res.status(500).json(error)
       }else {
-        res.status(200).json(result)
+        let response = []
+        for(let i = 0;i < result.length;i ++){
+          response.push(result[i].level)
+        }
+        res.status(200).json(response)
       }
     })
   } catch (e) {
