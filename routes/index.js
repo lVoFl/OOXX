@@ -58,4 +58,35 @@ router.get('/game/data', (req, res) => {
   }
 })
 
+router.post('/game/pass', (req, res) => {
+  try{
+    const name = req.body.name
+    const level = req.body.level
+    pool.query('insert into PassGame values(?, ?)', [name, level], (error, result) => {
+      if (error) {
+        res.status(500).json(error)
+      }else {
+        res.status(200).json("success")
+      }
+    })
+  } catch (e) {
+    res.status(500).json(e)
+  }
+})
+
+router.get('/game/pass', (req, res) => {
+  try{
+    const name = req.query.name
+    pool.query('select * from PassGame where name = ?', [name], (error, result) => {
+      if (error) {
+        res.status(500).json(error)
+      }else {
+        res.status(200).json(result)
+      }
+    })
+  } catch (e) {
+    res.status(500).json(e)
+  }
+})
+
 module.exports = router;

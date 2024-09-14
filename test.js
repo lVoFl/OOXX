@@ -1,7 +1,7 @@
 const io = require('socket.io-client');
 
-const socket = io('http://localhost:3001');
-
+// const socket = io('http://localhost:3001');
+const socket = io('http://8.134.218.50:3001')
 function joinRoom(roomID, password, name) {
     let data = { roomID, password, name }
     socket.emit('joinRoom', data, (callback) => {
